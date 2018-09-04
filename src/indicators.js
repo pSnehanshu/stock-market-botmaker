@@ -3,6 +3,7 @@ export default [
         name: 'Double exp moving avg (DEMA)',
         code: 'DMA',
         inputs: inputs(['Time period', 'timeperiod', 30]),
+        ohlcKeys: ['Close'],
     },
     {
         name: 'Exp moving avg (EMA)',

@@ -79,6 +79,7 @@ export default {
     methods: {
         emitChange() {
             var indicator = this.indicators[this.selectedIndicator].code
+            var ohlcKeys = this.indicators[this.selectedIndicator].ohlcKeys
             var timeframe = this.timeframes[this.timeframe].code
             var inputs = this.inputValues
             var candle = this.candle
@@ -86,8 +87,10 @@ export default {
             var output = template({
                 fn: indicator,
                 inputs,
+                timeframe,
+                ohlcKeys,
             })
-            this.$emit('change', output)
+            this.$emit('change', output, candle)
         },
     },
 
@@ -99,6 +102,9 @@ export default {
             this.inputValues[input.code] = input.dflt
          })
          this.emitChange()
+      },
+      candle (){
+          this.emitChange()
       }
     },
 }

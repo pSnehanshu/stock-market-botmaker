@@ -28,14 +28,20 @@ export default {
         operator: '<',
         lhs: null,
         rhs: null,
+        candle: {
+            lhs: 1,
+            rhs: 1,
+        },
     }),
     methods: {
-        lhsUpdate(code=''){
+        lhsUpdate(code='', candle=1){
             this.lhs = code
+            this.candle.lhs = candle
             this.onUpdate()
         },
-        rhsUpdate(code=''){
+        rhsUpdate(code='', candle=1){
             this.rhs = code
+            this.candle.rhs = candle
             this.onUpdate()
         },
 
@@ -45,9 +51,11 @@ export default {
                 rhs: this.rhs,
                 operator: this.operator,
                 open: true,
+                candle: this.candle,
             })
 
             this.$emit('change', output)
+            console.log(output)
         },
     },
 }
