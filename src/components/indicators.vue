@@ -86,9 +86,8 @@ export default {
             var output = template({
                 fn: indicator,
                 inputs,
-            })//{ indicator, inputs, timeframe, candle }
+            })
             this.$emit('change', output)
-            console.log(output)
         },
     },
 

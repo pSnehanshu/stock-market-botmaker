@@ -1,8 +1,8 @@
 <template>
     <div>
-        <indicator/>
+        <indicator @change="lhsUpdate"/>
         
-        <select v-model="operator">
+        <select v-model="operator" @input="onUpdate">
             <option value="<">&lt;</option>
             <option value=">">&gt;</option>
             <option value="<=">&le;</option>
@@ -11,17 +11,44 @@
             <option value="!=">&ne;</option>
         </select>
         
-        <indicator/>
+        <indicator @change="rhsUpdate"/>
     </div>
 </template>
 
 <script>
 import Indicator from '@/components/indicators'
+import ejs from 'ejs'
+import conditionTmpt from '@/py-templates/condition'
+
+const template = ejs.compile(conditionTmpt)
 
 export default {
     components: { Indicator },
     data: () => ({
         operator: '<',
+        lhs: null,
+        rhs: null,
     }),
+    methods: {
+        lhsUpdate(code=''){
+            this.lhs = code
+            this.onUpdate()
+        },
+        rhsUpdate(code=''){
+            this.rhs = code
+            this.onUpdate()
+        },
+
+        onUpdate(){
+            var output = template({
+                lhs: this.lhs,
+                rhs: this.rhs,
+                operator: this.operator,
+                open: true,
+            })
+
+            this.$emit('change', output)
+        },
+    },
 }
 </script>
