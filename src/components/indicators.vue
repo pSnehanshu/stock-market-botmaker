@@ -11,14 +11,18 @@
         <!--Inputs-->
         <template v-if="selectedIndicator != null">
            <template v-for="(input, k) in indicators[selectedIndicator].inputs">
-              <input
-                  :key="'input-'+k"
-                   type="number"
-                  :placeholder="input.name"
-                  :title="input.name"
-                  v-model="inputValues[k]"
-                  @input="emitChange"
-               >
+              <div :key="'input-'+k">
+                  <label>
+                      {{ input.name }}:
+                      <input
+                        type="number"
+                        :placeholder="input.name"
+                        :title="input.name"
+                        v-model="inputValues[k]"
+                        @input="emitChange"
+                      >
+                  </label><br>
+              </div>
            </template>
         </template>
 
