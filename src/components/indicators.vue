@@ -2,36 +2,38 @@
     <div>
         <!--Indicator-->
         <select v-model="selectedIndicator">
-            <option :value="null">INDICATOR</option>
+            <option :value="null">-SELECT-</option>
             <option :value="i" v-for="(indicator, i) in indicators" :key="'indicator-'+i">
                 {{ indicator.name }}
             </option>
         </select>
 
-        <!--Inputs-->
-        <template v-if="selectedIndicator != null">
-           <template v-for="(input, k) in indicators[selectedIndicator].inputs">
-              <div :key="'input-'+k">
-                  <label>
-                      {{ input.name }}:
-                      <input
-                        type="number"
-                        :placeholder="input.name"
-                        :title="input.name"
-                        v-model="inputValues[k]"
-                        @input="emitChange"
-                      >
-                  </label><br>
-              </div>
-           </template>
-        </template>
+        <template v-if="selectedIndicator != null" >
+            <!--Inputs-->
+            <template v-for="(input, k) in indicators[selectedIndicator].inputs">
+                <div :key="'input-'+k">
+                    <label>
+                        {{ input.name }}:
+                        <input
+                            type="number"
+                            :placeholder="input.name"
+                            :title="input.name"
+                            v-model="inputValues[k]"
+                            @input="emitChange"
+                        >
+                    </label><br>
+                </div>
+            </template>
 
-        <!--Timeframe-->
-        <select v-model="timeframe" v-if="selectedIndicator != null" @change="emitChange">
-            <option :value="j" v-for="(tf, j) in timeframes" :key="'tf-'+j">
-                {{ tf.name }}
-            </option>
-        </select>
+            <!--Timeframe-->
+            <select v-model="timeframe" @change="emitChange">
+                <option :value="j" v-for="(tf, j) in timeframes" :key="'tf-'+j">
+                    {{ tf.name }}
+                </option>
+            </select>
+
+            Candle: <input type="number" v-model="candle">
+        </template>
     </div>
 </template>
 
@@ -68,6 +70,7 @@ export default {
         inputs: null,
         inputValues: {},
         output: null,
+        candle: 1,
     }),
 
     methods: {
@@ -75,8 +78,9 @@ export default {
             var indicator = this.indicators[this.selectedIndicator].code
             var timeframe = this.timeframes[this.timeframe].code
             var inputs = this.inputValues
+            var candle = this.candle
 
-            this.output = { indicator, inputs, timeframe }
+            this.output = { indicator, inputs, timeframe, candle }
             this.$emit('change', this.output)
         },
     },

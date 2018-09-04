@@ -1,18 +1,32 @@
 <template>
   <div id="app">
-      <indicator />
+      <template v-for="i in numConditions">
+         <condition :key="'condition-'+i"/>
+         <hr :key="i">
+      </template>
+      <br>
+      <button @click="numConditions++">+</button>
   </div>
 </template>
 
 <script>
-import Indicator from '@/components/indicators'
+import Condition from '@/components/condition'
 
 export default {
   name: 'app',
-  components: { Indicator }
+  components: { Condition },
+  data: () => ({
+     numConditions:1,
+  }),
 }
 </script>
 
 <style>
-
+.operator{
+   text-align: center;
+}
+.delete-btn{
+   background-color: red;
+   color: white;
+}
 </style>
