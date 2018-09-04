@@ -40,9 +40,9 @@
 <script>
 import indicators from '@/indicators'
 import ejs from 'ejs'
-import conditionTmpt from '@/py-templates/condition'
+import indicatorTmpt from '@/py-templates/indicator'
 
-const template = ejs.compile(conditionTmpt)
+const template = ejs.compile(indicatorTmpt)
 
 export default {
     data: () => ({
