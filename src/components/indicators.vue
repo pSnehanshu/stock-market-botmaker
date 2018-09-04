@@ -10,14 +10,20 @@
 
         <!--Inputs-->
         <template v-if="selectedIndicator != null">
-            <input type="number" :placeholder="input.name" :title="input.name"
-                v-for="(input, k) in indicators[selectedIndicator].inputs"
-                :key="'input-'+k" :value="input.dflt"
-            >
+           <template v-for="(input, k) in indicators[selectedIndicator].inputs">
+              <input
+                  :key="'input-'+k"
+                   type="number"
+                  :placeholder="input.name"
+                  :title="input.name"
+                  v-model="inputValues[k]"
+                  @input="emitChange"
+               >
+           </template>
         </template>
 
         <!--Timeframe-->
-        <select v-model="timeframe" v-if="selectedIndicator != null">
+        <select v-model="timeframe" v-if="selectedIndicator != null" @change="emitChange">
             <option :value="j" v-for="(tf, j) in timeframes" :key="'tf-'+j">
                 {{ tf.name }}
             </option>
@@ -55,7 +61,31 @@ export default {
                 code: 'T60',
             },
         ],
+        inputs: null,
+        inputValues: {},
+        output: null,
     }),
+
+    methods: {
+        emitChange() {
+            var indicator = this.indicators[this.selectedIndicator].code
+            var timeframe = this.timeframes[this.timeframe].code
+            var inputs = this.inputValues
+
+            this.output = { indicator, inputs, timeframe }
+            this.$emit('change', this.output)
+        },
+    },
+
+    watch: {
+      selectedIndicator (index){
+         this.inputs = this.indicators[index].inputs
+         this.inputValues = {}
+         this.inputs.forEach((input, i) => {
+            this.inputValues[i] = input.dflt
+         })
+         this.emitChange()
+      }
+    },
 }
 </script>
-
