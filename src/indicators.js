@@ -88,8 +88,8 @@ export default [
 
 
 // Functions
-function input (name, codename, dflt=null){
-    return { name, codename, dflt }
+function input (name, code, dflt=null){
+    return { name, code, dflt }
 }
 
 function inputs(...inp){

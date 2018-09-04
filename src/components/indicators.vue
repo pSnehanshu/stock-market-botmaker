@@ -18,7 +18,7 @@
                             type="number"
                             :placeholder="input.name"
                             :title="input.name"
-                            v-model="inputValues[k]"
+                            v-model="inputValues[input.code]"
                             @input="emitChange"
                         >
                     </label><br>
@@ -39,6 +39,10 @@
 
 <script>
 import indicators from '@/indicators'
+import ejs from 'ejs'
+import conditionTmpt from '@/py-templates/condition'
+
+const template = ejs.compile(conditionTmpt)
 
 export default {
     data: () => ({
@@ -69,7 +73,6 @@ export default {
         ],
         inputs: null,
         inputValues: {},
-        output: null,
         candle: 1,
     }),
 
@@ -80,8 +83,12 @@ export default {
             var inputs = this.inputValues
             var candle = this.candle
 
-            this.output = { indicator, inputs, timeframe, candle }
-            this.$emit('change', this.output)
+            var output = template({
+                fn: indicator,
+                inputs,
+            })//{ indicator, inputs, timeframe, candle }
+            this.$emit('change', output)
+            console.log(output)
         },
     },
 
@@ -90,7 +97,7 @@ export default {
          this.inputs = this.indicators[index].inputs
          this.inputValues = {}
          this.inputs.forEach((input, i) => {
-            this.inputValues[i] = input.dflt
+            this.inputValues[input.code] = input.dflt
          })
          this.emitChange()
       }

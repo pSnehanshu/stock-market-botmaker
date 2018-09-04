@@ -2,7 +2,8 @@
   <div id="app">
       <template v-for="i in numConditions">
          <condition :key="'condition-'+i"/>
-         <hr :key="i">
+         <button :key="'del-btn-'+i" >&times;</button>
+         <hr :key="'sep-hr-'+i">
       </template>
       <br>
       <button @click="numConditions++">+</button>
