@@ -1,89 +1,114 @@
 export default [
     {
         name: 'Double exp moving avg (DEMA)',
-        code: 'DMA',
+        code: 't.DMA',
         inputs: inputs(['Time period', 'timeperiod', 30]),
         ohlcKeys: ['Close'],
     },
     {
         name: 'Exp moving avg (EMA)',
-        code: 'EMA',
+        code: 't.EMA',
         inputs: inputs(['Time period', 'timeperiod', 30]),
     },
     {
         name: 'Moving avg (MA)',
-        code: 'MA',
+        code: 't.MA',
         inputs: inputs(['Time period', 'timeperiod', 30]),
     },
     {
         name: 'Kaufman Adaptive moving avg (KAMA)',
-        code: 'KAMA',
+        code: 't.KAMA',
         inputs: inputs(['Time period', 'timeperiod', 30]),
     },
     {
         name: 'Simple moving avg (SMA)',
-        code: 'SMA',
+        code: 't.SMA',
         inputs: inputs(['Time period', 'timeperiod', 30]),
     },
     {
         name: 'Triple exp moving avg (TEMA)',
-        code: 'TEMA',
+        code: 't.TEMA',
         inputs: inputs(['Time period', 'timeperiod', 30]),
     },
     {
         name: 'Triangular moving avg (TRIMA)',
-        code: 'TRIMA',
+        code: 't.TRIMA',
         inputs: inputs(['Time period', 'timeperiod', 30]),
     },
     {
         name: 'Waited moving avg (WMA)',
-        code: 'WMA',
+        code: 't.WMA',
         inputs: inputs(['Time period', 'timeperiod', 30]),
     },
     {
         name: 'Average directional movement index (ADX)',
-        code: 'ADX',
+        code: 't.ADX',
         inputs: inputs(['Time period', 'timeperiod', 14]),
     },
     {
         name: 'Average directional index rating (ADXR)',
-        code: 'ADXR',
+        code: 't.ADXR',
         inputs: inputs(['Time period', 'timeperiod', 14]),
     },
     {
         name: 'Commodity channel index (CCI)',
-        code: 'CCI',
+        code: 't.CCI',
         inputs: inputs(['Time period', 'timeperiod', 14]),
     },
     {
         name: 'Chande momentum oscillator (CMO)',
-        code: 'CMO',
+        code: 't.CMO',
         inputs: inputs(['Time period', 'timeperiod', 14]),
     },
     {
         name: 'Directional movement index (DX)',
-        code: 'DX',
+        code: 't.DX',
         inputs: inputs(['Time period', 'timeperiod', 14]),
     },
     {
         name: 'Balance of Power',
-        code: 'BOP',
+        code: 't.BOP',
         inputs: inputs(),
     },
     {
         name: 'Aroon Oscillator',
-        code: 'AROONOSC',
+        code: 't.AROONOSC',
         inputs: inputs(['Time period', 'timeperiod', 14]),
     },
     {
         name: 'Money flow index',
-        code: 'MFI',
+        code: 't.MFI',
         inputs: inputs(['Time period', 'timeperiod', 14]),
     },
     {
         name: 'Relative strength index',
-        code: 'RSI',
+        code: 't.RSI',
         inputs: inputs(['Time period', 'timeperiod', 14]),
+    },
+    
+    {
+        name: 'Closing price',
+        code: '',
+        inputs: inputs(),
+        ohlcKeys: ['Close'],
+    },
+    {
+        name: 'Opening price',
+        code: '',
+        inputs: inputs(),
+        ohlcKeys: ['Open'],
+    },
+    {
+        name: 'High price',
+        code: '',
+        inputs: inputs(),
+        ohlcKeys: ['High'],
+    },
+    {
+        name: 'Low price',
+        code: '',
+        inputs: inputs(),
+        ohlcKeys: ['Low'],
     },
 ]
 
