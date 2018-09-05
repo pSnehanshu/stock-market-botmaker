@@ -9,6 +9,7 @@
       </template>
       <br>
       <button @click="addCondition">+</button>
+      <pre>{{ code }}</pre>
   </div>
 </template>
 
@@ -23,6 +24,15 @@ export default {
      conditions: {},
      lastConditionIndex:0,
   }),
+  computed: {
+    code() {
+      var code = ''      
+      for (var i in this.conditions){
+        code += this.conditions[i]
+      }
+      return code
+    },
+  },
   methods: {
     conditionHandle(i, condition) {
       console.log(i)
