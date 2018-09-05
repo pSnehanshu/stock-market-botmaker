@@ -52,6 +52,7 @@ export default {
                 operator: this.operator,
                 open: true,
                 candle: this.candle,
+                nonp: this.nonp,
             })
 
             this.$emit('change', output)
