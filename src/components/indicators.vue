@@ -71,36 +71,35 @@ export default {
                 code: 'T60',
             },
         ],
-        inputs: null,
         inputValues: {},
         candle: 1,
     }),
 
     methods: {
         emitChange() {
-            var indicator = this.indicators[this.selectedIndicator].code
-            var ohlcKeys = this.indicators[this.selectedIndicator].ohlcKeys
-            var timeframe = this.timeframes[this.timeframe].code
-            var inputs = this.inputValues
-            var candle = this.candle
+            var indicator = this.indicators[this.selectedIndicator]
 
             var output = template({
-                fn: indicator,
-                inputs,
-                timeframe,
-                ohlcKeys,
+                fn: indicator.code,
+                inputs: this.inputValues,
+                timeframe: this.timeframes[this.timeframe].code,
+                ohlcKeys: indicator.ohlcKeys,
+                nonp: indicator.nonp,
+                candle: this.candle,
             })
-            this.$emit('change', output, candle)
+
+            this.$emit('change', output)
         },
     },
 
     watch: {
       selectedIndicator (index){
-         this.inputs = this.indicators[index].inputs
          this.inputValues = {}
-         this.inputs.forEach((input, i) => {
+
+         this.indicators[index].inputs.forEach((input, i) => {
             this.inputValues[input.code] = input.dflt
          })
+
          this.emitChange()
       },
       candle (){
