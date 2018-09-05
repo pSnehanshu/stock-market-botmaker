@@ -48,7 +48,6 @@ export default {
             })
 
             this.$emit('change', output)
-            console.log(output)
         },
     },
 }

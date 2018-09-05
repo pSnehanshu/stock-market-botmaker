@@ -1,31 +1,45 @@
 <template>
   <div id="app">
-      <template v-for="i in numConditions">
-         <condition :key="'condition-'+i"/>
-         <button :key="'del-btn-'+i" >&times;</button>
-         <hr :key="'sep-hr-'+i">
+      <template v-for="(c, i) in conditions">
+         <div :key="'condition-'+i">
+            <condition @change="conditionHandle(i, $event)" />
+            <button class="delete-btn" @click="removeCondition(i)">&times;</button>
+            <hr>
+         </div>
       </template>
       <br>
-      <button @click="numConditions++">+</button>
+      <button @click="addCondition">+</button>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import Condition from '@/components/condition'
 
 export default {
   name: 'app',
   components: { Condition },
   data: () => ({
-     numConditions:1,
+     conditions: {},
+     lastConditionIndex:0,
   }),
+  methods: {
+    conditionHandle(i, condition) {
+      console.log(i)
+      this.conditions[i] = condition
+    },
+    removeCondition(i){
+      Vue.delete(this.conditions, i)
+    },
+    addCondition(){
+      this.lastConditionIndex++
+      Vue.set(this.conditions, this.lastConditionIndex, '')
+    }
+  },
 }
 </script>
 
 <style>
-.operator{
-   text-align: center;
-}
 .delete-btn{
    background-color: red;
    color: white;
