@@ -1,57 +1,28 @@
 <template>
   <div id="app">
-      <template v-for="(c, i) in conditions">
-         <div :key="'condition-'+i">
-            <condition @change="conditionHandle(i, $event)" />
-            <button class="delete-btn" @click="removeCondition(i)">&times;</button>
-            <hr>
-         </div>
-      </template>
-      <br>
-      <button @click="addCondition">+</button>
-      <pre>{{ code }}</pre>
+      <div>
+          <h1>Open</h1>
+          <condition-list type="open" @change="open=$event" />
+          <pre>{{open}}</pre>
+      </div>
+      <div>
+          <h1>Close</h1>
+          <condition-list type="close" @change="close=$event" />
+          <pre>{{close}}</pre>
+      </div>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-import Condition from '@/components/condition'
+import ConditionList from '@/components/conditionList'
 
 export default {
   name: 'app',
-  components: { Condition },
+  components: { ConditionList },
   data: () => ({
-     conditions: {},
-     lastConditionIndex:0,
+    open: '',
+    close: '',
   }),
-  computed: {
-    code() {
-      var code = ''      
-      for (var i in this.conditions){
-        code += this.conditions[i]
-      }
-      return code
-    },
-  },
-  methods: {
-    conditionHandle(i, condition) {
-      console.log(i)
-      this.conditions[i] = condition
-    },
-    removeCondition(i){
-      Vue.delete(this.conditions, i)
-    },
-    addCondition(){
-      this.lastConditionIndex++
-      Vue.set(this.conditions, this.lastConditionIndex, '')
-    }
-  },
+  
 }
 </script>
-
-<style>
-.delete-btn{
-   background-color: red;
-   color: white;
-}
-</style>

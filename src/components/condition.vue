@@ -24,6 +24,7 @@ const template = ejs.compile(conditionTmpt)
 
 export default {
     components: { Indicator },
+    props: ['type'],
     data: () => ({
         operator: '<',
         lhs: null,
@@ -44,7 +45,7 @@ export default {
                 lhs: this.lhs,
                 rhs: this.rhs,
                 operator: this.operator,
-                open: true,
+                open: (this.type.toLowerCase().trim()=='open'),
             })
 
             this.$emit('change', output)
