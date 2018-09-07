@@ -43,8 +43,10 @@ import ejs from 'ejs'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver/FileSaver'
 import AnalysisTmplt from '@/py-templates/analysis'
+import ConfigTmplt from '@/py-templates/config'
 
 const analysisTemplate = ejs.compile(AnalysisTmplt)
+const configTemplate = ejs.compile(ConfigTmplt)
 
 export default {
   name: 'app',
@@ -98,6 +100,14 @@ export default {
         })
 
         return output
+      },
+      configsCode() {
+          var config = {}
+          for (c in this.configs) {
+            config[c] = this.configs[c].val
+          }
+
+          return configTemplate(config)
       },
   },
   
