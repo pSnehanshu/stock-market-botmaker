@@ -1,6 +1,17 @@
 <template>
   <div id="app">
       <div>
+          <h1>Configs</h1>
+          <table>
+              <tr v-for="(config, i) in configs" :key="'config-'+i">
+                  <th v-text="config.name"></th>
+                  <td>
+                      <input type="text" v-model="config.val">
+                  </td>
+              </tr>
+          </table>
+      </div>
+      <div>
           <h1>Open</h1>
           <condition-list type="open" @change="open=$event" />
           <pre>{{open}}</pre>
@@ -39,6 +50,36 @@ export default {
     stopLoss: '',
     takeProfit: '',
     tick: '',
+    configs: {
+        max_trades: {
+            name: 'Max trades',
+            val: 5,
+        },
+        qty_multiplier: {
+            name: 'Leverage',
+            val: 20,
+        },
+        qty_parts: {
+            name: 'Capital division',
+            val: 10,
+        },
+        trade_start_hour: {
+            name: 'Trade start hour',
+            val: 9,
+        },
+        trade_start_minute: {
+            name: 'Trade start minute',
+            val: 15,
+        },
+        trade_end_hour: {
+            name: 'Trade end hour',
+            val: 10,
+        },
+        trade_end_minute: {
+            name: 'Trade end minute',
+            val: 0,
+        },
+    },
   }),
   
   computed: {
