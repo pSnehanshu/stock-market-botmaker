@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+      <button @click="zip">Download</button>
       <div>
           <h1>Configs</h1>
           <table>
@@ -103,7 +104,7 @@ export default {
       },
       configsCode() {
           var config = {}
-          for (c in this.configs) {
+          for (var c in this.configs) {
             config[c] = this.configs[c].val
           }
 
@@ -118,19 +119,14 @@ export default {
       var zip = new JSZip()
       
       // Add an top-level, arbitrary text file with contents
-      zip.file("Hello.txt", "Hello World\n");
-  
-      // Generate a directory within the Zip file structure
-      var dir1 = zip.folder("dir1");
-  
-      // Add a file to the directory, in this case an image with data URI as contents
-      dir1.file("smile.txt", 'Sime');
+      zip.file("analysis.py", this.analysisCode);
+      zip.file("config.py", this.configsCode)      
   
       // Generate the zip file asynchronously
-      zip.generateAsync({type:"blob"})
+      zip.generateAsync({ type:"blob" })
       .then(function(content) {
           // Force down of the Zip file
-          saveAs(content, "archive.zip");
+          saveAs(content, "bot.zip");
       });
     }
   },
