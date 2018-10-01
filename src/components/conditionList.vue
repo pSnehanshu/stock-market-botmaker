@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     conditionHandle(i, condition) {
-      console.log(i)
       this.conditions[i] = condition
     },
     removeCondition(i){

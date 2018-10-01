@@ -89,28 +89,6 @@ export default {
         },
     },
   }),
-
-  computed: {
-      analysisCode() {
-        var output = analysisTemplate({
-            open: this.open,
-            close: this.close,
-            stopLoss: this.stopLoss,
-            takeProfit: this.takeProfit,
-            tick: this.tick,
-        })
-
-        return output
-      },
-      configsCode() {
-          var config = {}
-          for (var c in this.configs) {
-            config[c] = this.configs[c].val
-          }
-
-          return configTemplate(config)
-      },
-  },
   
   methods: {
     zip() {
@@ -119,8 +97,8 @@ export default {
       var zip = new JSZip()
       
       // Add an top-level, arbitrary text file with contents
-      zip.file("analysis.py", this.analysisCode);
-      zip.file("config.py", this.configsCode)      
+      zip.file("analysis.py", this.analysisCode(4));
+      zip.file("config.py", this.configsCode(4))
   
       // Generate the zip file asynchronously
       zip.generateAsync({ type:"blob" })
@@ -128,8 +106,46 @@ export default {
           // Force down of the Zip file
           saveAs(content, "bot.zip");
       });
-    }
+    },
+
+    analysisCode(indent=0) {
+        var output = analysisTemplate({
+            open: indentText(this.open, indent),
+            close: indentText(this.close, indent),
+            stopLoss: this.stopLoss,
+            takeProfit: this.takeProfit,
+            tick: this.tick,
+        })
+
+        return output
+    },
+    configsCode(indent=0) {
+        var config = {}
+        for (var c in this.configs) {
+            config[c] = this.configs[c].val
+        }
+
+        return configTemplate(config)
+    },
   },
 
 }
+
+function indentText(string='', level=4){
+    var lines = string.split('\n')
+    var spaces = ''
+    for (i in level){
+        spaces += ' '
+    }
+    var output = ''
+
+    lines.forEach( function(line){
+        output += spaces + line + '\n'
+    })
+
+    console.log(output)
+
+    return output
+}
+
 </script>

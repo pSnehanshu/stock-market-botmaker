@@ -12,7 +12,7 @@ def open_trade_analysis(temp,live,candle = 1):
     low_live = live['low']
     
     # Open conditions
-    <%- open %>
+<%- open %>
 
     return True
 
@@ -43,6 +43,6 @@ def close_trade_analysis(temp,live,candle = 1):
     low_live = live['low']
 
     # Close code
-    <%- close %>
+<%- close %>
 
     return False`
