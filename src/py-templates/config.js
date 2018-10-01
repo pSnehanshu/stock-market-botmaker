@@ -3,33 +3,33 @@ export default
 d = str(Path().resolve().parent).replace("\\\\","/")
 
 #config.py
-max_trades = 10
+max_trades = <%- max_trades %>
 ##########################
-qty_multiplier = 20
-qty_parts = 10
+qty_multiplier = <%- qty_multiplier %>
+qty_parts =  <%- qty_parts %>
 ##########################
-trade_start_hour = 9
-trade_start_minute = 14
-trade_end_hour = 12
-trade_end_minute = 30
+trade_start_hour =  <%- trade_start_hour %>
+trade_start_minute = <%- trade_start_minute %>
+trade_end_hour =  <%- trade_end_hour  %>
+trade_end_minute = <%- trade_end__minute  %>
 ##########################
-close_start_hour = 9
-close_start_minute = 19
-close_end_hour = 14
-close_end_minute = 30 
+close_start_hour = <%- close_start_hour %>
+close_start_minute = <%- close_start_minute %>
+close_end_hour = <%- close_end_hour %>
+close_end_minute = <%- close_end_minute %> 
 ##########################
 status_path = './status.hdex'
-#terminal_path = './Data/terminal.hdex'
+#terminal_path = <%- terminal_path %>
 log_path = './log.hdex'
-selected_db_path = d+'/DATA/DB/SELECTED/SELL.csv'
+elected_db_paths = <%- elected_db_paths %>
 open_db_path = './OpenTrade.hdex'
 #########################
-username = ''
-password= ''
-dob = ''
-api_code = '3wwO3kM7d66zTaNAvlzEi4lh0YDI1SFw6TBaNCgt'
-api_secret = 'i0vy7zn7ya'
+username = <%- username %>
+password= <%- password %>
+dob = <%- dob %>
+api_code = <%- api_code %>
+api_secret = <%- api_secret %>
 ########################
-side = 'SELL'
+side = <%- side %>
 ########################
 `
