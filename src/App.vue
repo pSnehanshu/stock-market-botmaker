@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-      <button @click="getFile">Download</button>
       <div>
           <h1>Configs</h1>
           <table>
@@ -34,6 +33,9 @@
           <h1>Trailing Tick</h1>
           <sl-tp-tk @change="tick='tk = '+$event" />
       </div>
+
+      <button @click="getFile">Download</button>
+
   </div>
 </template>
 
@@ -98,10 +100,10 @@ export default {
         saveAs(code, "bot.py");
     },
 
-    analysisCode(indent=0) {
+    analysisCode() {
         var output = analysisTemplate({
-            open: indentText(this.open, indent),
-            close: indentText(this.close, indent),
+            open: indentText(this.open),
+            close: indentText(this.close),
             stopLoss: this.stopLoss,
             takeProfit: this.takeProfit,
             tick: this.tick,
@@ -109,7 +111,7 @@ export default {
 
         return output
     },
-    configsCode(indent=0) {
+    configsCode() {
         var config = {}
         for (var c in this.configs) {
             config[c] = this.configs[c].val
@@ -117,7 +119,7 @@ export default {
 
         return configTemplate(config)
     },
-    botCode(indent=0){
+    botCode(){
         var output = botTemplate({
             config: this.configsCode(),
             analysis: this.analysisCode(),
@@ -132,7 +134,7 @@ export default {
 function indentText(string='', level=4){
     var lines = string.split('\n')
     var spaces = ''
-    for (i in level){
+    for (var i=0; i<level; i++){
         spaces += ' '
     }
     var output = ''
@@ -140,8 +142,6 @@ function indentText(string='', level=4){
     lines.forEach( function(line){
         output += spaces + line + '\n'
     })
-
-    console.log(output)
 
     return output
 }
