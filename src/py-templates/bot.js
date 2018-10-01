@@ -14,7 +14,7 @@ import talib as t
 import subprocess
 import requests
 
-d = str(Path().resolve().parent).replace("\\","/")
+d = str(Path().resolve().parent).replace("\\\\","/")
 
 #######################################################################
 # CONFIG
@@ -34,7 +34,7 @@ def check_status(name):
 def printf(text = ""):
     print(str(text))
     with open(log_path, "a") as myfile:
-        myfile.write(str(dt.datetime.now())+' : '+str(text)+'\n')
+        myfile.write(str(dt.datetime.now())+' : '+str(text)+'\\n')
 
 def refresh_session():
     while True:
@@ -323,7 +323,7 @@ def run_threaded(job_func):
     job_thread.start()
 
 def run():
-    print('Controller started running \n')
+    print('Controller started running \\n')
     schedule.every().day.at(str(trade_start_hour)+":"+str(trade_start_minute)).do(run_threaded, run_trade_init)
     schedule.every().day.at(str(close_start_hour)+":"+str(close_start_minute)).do(run_threaded, run_check_trade)
     schedule.every().day.at("23:30").do(run_threaded, run_reset)

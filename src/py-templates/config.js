@@ -1,6 +1,6 @@
 export default
 `
-d = str(Path().resolve().parent).replace("\\","/")
+d = str(Path().resolve().parent).replace("\\\\","/")
 
 #config.py
 max_trades = 10

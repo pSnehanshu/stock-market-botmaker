@@ -96,8 +96,8 @@ export default {
   methods: {
     getFile(){
         var code = this.botCode()
-        console.log(code)
-        saveAs(code, "bot.py");
+        var blob = new Blob([code], {type: "text/plain;charset=utf-8"});
+        saveAs(blob, "bot.py");
     },
 
     analysisCode() {
