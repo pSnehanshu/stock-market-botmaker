@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <button @click="zip">Download</button>
+      <button @click="getFile">Download</button>
       <div>
           <h1>Configs</h1>
           <table>
@@ -41,13 +41,14 @@
 import ConditionList from '@/components/conditionList'
 import SlTpTk from '@/components/sl_tp_tk'
 import ejs from 'ejs'
-import JSZip from 'jszip'
 import { saveAs } from 'file-saver/FileSaver'
 import AnalysisTmplt from '@/py-templates/analysis'
 import ConfigTmplt from '@/py-templates/config'
+import BotTmplt from '@/py-templates/bot'
 
 const analysisTemplate = ejs.compile(AnalysisTmplt)
 const configTemplate = ejs.compile(ConfigTmplt)
+const botTemplate = ejs.compile(BotTmplt)
 
 export default {
   name: 'app',
@@ -91,21 +92,10 @@ export default {
   }),
   
   methods: {
-    zip() {
-      // Return full code
-
-      var zip = new JSZip()
-      
-      // Add an top-level, arbitrary text file with contents
-      zip.file("analysis.py", this.analysisCode(4));
-      zip.file("config.py", this.configsCode(4))
-  
-      // Generate the zip file asynchronously
-      zip.generateAsync({ type:"blob" })
-      .then(function(content) {
-          // Force down of the Zip file
-          saveAs(content, "bot.zip");
-      });
+    getFile(){
+        var code = this.botCode()
+        console.log(code)
+        saveAs(code, "bot.py");
     },
 
     analysisCode(indent=0) {
@@ -126,6 +116,14 @@ export default {
         }
 
         return configTemplate(config)
+    },
+    botCode(indent=0){
+        var output = botTemplate({
+            config: this.configsCode(),
+            analysis: this.analysisCode(),
+        })
+
+        return output
     },
   },
 

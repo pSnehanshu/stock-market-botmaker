@@ -1,8 +1,5 @@
 export default 
-`import numpy as np
-import talib as t
-import pandas as pd
-
+`
 def open_trade_analysis(temp,live,candle = 1):
     T1,T5,T10,T30,T60 = temp
     ltp_live = live['ltp']
@@ -15,7 +12,6 @@ def open_trade_analysis(temp,live,candle = 1):
 <%- open %>
 
     return True
-
 
 def sl_tp_tk(temp,live):
     T1,T5,T15,T30,T60 = temp
@@ -32,8 +28,6 @@ def sl_tp_tk(temp,live):
 
     return sl,tp,tk
 
-
-
 def close_trade_analysis(temp,live,candle = 1):
     T1,T5,T10,T30,T60 = temp
     ltp_live = live['ltp']
@@ -45,4 +39,5 @@ def close_trade_analysis(temp,live,candle = 1):
     # Close code
 <%- close %>
 
-    return False`
+    return False
+`
