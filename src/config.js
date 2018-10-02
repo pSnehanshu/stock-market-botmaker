@@ -69,7 +69,7 @@ export default {
         val: 0,
     },
     side: {
-        name: 'Trade end minute',
+        name: 'Side',
         val: 'BUY',
     },
 }
