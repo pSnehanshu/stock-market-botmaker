@@ -19,9 +19,8 @@ close_end_hour = <%- close_end_hour %>
 close_end_minute = <%- close_end_minute %> 
 ##########################
 status_path = './status.hdex'
-#terminal_path = <%- terminal_path %>
 log_path = './log.hdex'
-elected_db_paths = <%- elected_db_paths %>
+selected_db_paths = <%- selected_db_paths %>
 open_db_path = './OpenTrade.hdex'
 #########################
 username = <%- username %>
